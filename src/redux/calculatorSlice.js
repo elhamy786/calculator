@@ -34,10 +34,9 @@ const calculatorSlice = createSlice({
       state.expression += digit;
       state.lastWasEquals = false;
     },
-
     inputOperator: (state, action) => {
       const nextOperator = action.payload;
-
+    
       if (state.lastWasEquals) {
         state.expression = `${state.lastResult} ${nextOperator} `;
         state.displayValue = `${state.lastResult} ${nextOperator} `;
@@ -45,26 +44,24 @@ const calculatorSlice = createSlice({
       } else {
         if (state.waitingForOperand) {
           if (nextOperator === '-') {
-            state.displayValue = state.displayValue.slice(0, -1) + nextOperator;
-            state.expression = state.expression.slice(0, -1) + nextOperator;
+            state.displayValue = `${state.displayValue.slice(0, -1)}${nextOperator}`;
+            state.expression = `${state.expression.slice(0, -1)}${nextOperator}`;
           } else {
-            state.expression = state.expression.slice(0, -2) + ` ${nextOperator} `;
-            state.displayValue = state.displayValue.slice(0, -2) + ` ${nextOperator} `;
+            state.expression = `${state.expression.slice(0, -2)} ${nextOperator} `;
+            state.displayValue = `${state.displayValue.slice(0, -2)} ${nextOperator} `;
           }
+        } else if (state.operator && !['+', '-', '*', '/'].includes(nextOperator)) {
+          state.expression = `${state.expression.slice(0, -2)} ${nextOperator} `;
+          state.displayValue = `${state.displayValue.slice(0, -2)} ${nextOperator} `;
         } else {
-          if (state.operator && !['+', '-', '*', '/'].includes(nextOperator)) {
-            state.expression = state.expression.slice(0, -2) + ` ${nextOperator} `;
-            state.displayValue = state.displayValue.slice(0, -2) + ` ${nextOperator} `;
-          } else {
-            state.expression += ` ${nextOperator} `;
-            state.displayValue += ` ${nextOperator} `;
-          }
+          state.expression += ` ${nextOperator} `;
+          state.displayValue += ` ${nextOperator} `;
         }
-
+    
         state.operator = nextOperator;
         state.waitingForOperand = true;
       }
-
+    
       state.lastWasEquals = false;
     },
 

@@ -8,7 +8,6 @@ import {
 } from '../redux/calculatorSlice';
 
 const buttons = [
-  
   { id: 'add', label: '+', type: 'operator' },
   { id: 'subtract', label: '-', type: 'operator' },
   { id: 'multiply', label: '*', type: 'operator' },
@@ -58,11 +57,7 @@ const Calculator = () => {
       <div id="display">{displayValue}</div>
       <div className="buttons">
         {buttons.map(({ id, label, type }) => (
-          <button
-            key={id}
-            id={id}
-            onClick={() => handleButtonClick(type, label)}
-          >
+          <button key={id} id={id} onClick={() => handleButtonClick(type, label)}>
             {label}
           </button>
         ))}
