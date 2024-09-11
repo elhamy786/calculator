@@ -57,7 +57,8 @@ const Calculator = () => {
       <div id="display">{displayValue}</div>
       <div className="buttons">
         {buttons.map(({ id, label, type }) => (
-          <button key={id} id={id} type="button" onClick={() => handleButtonClick(type, label)}> {label} </button>
+          <button key={id} id={id} type="button" onClick={() => handleButtonClick(type, label)}>
+           {label} </button>
         ))}
       </div>
     </div>
