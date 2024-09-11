@@ -57,9 +57,9 @@ const calculatorSlice = createSlice({
           state.displayValue += ` ${nextOperator} `;
         }
 
-        state.operator = nextOperator;
-        state.waitingForOperand = true;
-      }
+          state.operator = nextOperator;
+          state.waitingForOperand = true;
+        }
 
       state.lastWasEquals = false;
     },
