@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Calculator</h1>
         <Calculator />
+        <h1 className="name">Designed and Coded By Elhamy</h1>
       </header>
     </div>
   );

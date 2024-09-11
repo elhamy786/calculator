@@ -1,73 +1,72 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   inputDigit,
-  inputDecimal,
-  handleOperator,
+  inputOperator,
+  calculateResult,
   clear,
-  equal,
 } from '../redux/calculatorSlice';
+
+const buttons = [
+  
+  { id: 'add', label: '+', type: 'operator' },
+  { id: 'subtract', label: '-', type: 'operator' },
+  { id: 'multiply', label: '*', type: 'operator' },
+  { id: 'divide', label: '/', type: 'operator' },
+  { id: 'seven', label: '7', type: 'digit' },
+  { id: 'eight', label: '8', type: 'digit' },
+  { id: 'nine', label: '9', type: 'digit' },
+  { id: 'clear', label: 'C', type: 'action' },
+  { id: 'four', label: '4', type: 'digit' },
+  { id: 'five', label: '5', type: 'digit' },
+  { id: 'six', label: '6', type: 'digit' },
+  { id: 'equals', label: '=', type: 'action' },
+  { id: 'one', label: '1', type: 'digit' },
+  { id: 'two', label: '2', type: 'digit' },
+  { id: 'three', label: '3', type: 'digit' },
+  { id: 'decimal', label: '.', type: 'digit' },
+  { id: 'zero', label: '0', type: 'digit' },
+
+];
 
 const Calculator = () => {
   const dispatch = useDispatch();
   const displayValue = useSelector((state) => state.calculator.displayValue);
 
+  const handleButtonClick = (type, value) => {
+    switch (type) {
+      case 'operator':
+        dispatch(inputOperator(value));
+        break;
+      case 'action':
+        if (value === '=') {
+          dispatch(calculateResult());
+        } else if (value === 'C') {
+          dispatch(clear());
+        }
+        break;
+      case 'digit':
+        dispatch(inputDigit(value));
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="calculator">
-      <div id="display" className="display">
-        {displayValue}
+      <div id="display">{displayValue}</div>
+      <div className="buttons">
+        {buttons.map(({ id, label, type }) => (
+          <button
+            key={id}
+            id={id}
+            onClick={() => handleButtonClick(type, label)}
+          >
+            {label}
+          </button>
+        ))}
       </div>
-      <button id="clear" onClick={() => dispatch(clear())}>
-        AC
-      </button>
-      <button id="divide" onClick={() => dispatch(handleOperator('/'))}>
-        /
-      </button>
-      <button id="multiply" onClick={() => dispatch(handleOperator('*'))}>
-        *
-      </button>
-      <button id="seven" onClick={() => dispatch(inputDigit('7'))}>
-        7
-      </button>
-      <button id="eight" onClick={() => dispatch(inputDigit('8'))}>
-        8
-      </button>
-      <button id="nine" onClick={() => dispatch(inputDigit('9'))}>
-        9
-      </button>
-      <button id="subtract" onClick={() => dispatch(handleOperator('-'))}>
-        -
-      </button>
-      <button id="four" onClick={() => dispatch(inputDigit('4'))}>
-        4
-      </button>
-      <button id="five" onClick={() => dispatch(inputDigit('5'))}>
-        5
-      </button>
-      <button id="six" onClick={() => dispatch(inputDigit('6'))}>
-        6
-      </button>
-      <button id="add" onClick={() => dispatch(handleOperator('+'))}>
-        +
-      </button>
-      <button id="one" onClick={() => dispatch(inputDigit('1'))}>
-        1
-      </button>
-      <button id="two" onClick={() => dispatch(inputDigit('2'))}>
-        2
-      </button>
-      <button id="three" onClick={() => dispatch(inputDigit('3'))}>
-        3
-      </button>
-      <button id="equals" onClick={() => dispatch(equal())}>
-        =
-      </button>
-      <button id="zero" onClick={() => dispatch(inputDigit('0'))}>
-        0
-      </button>
-      <button id="decimal" onClick={() => dispatch(inputDecimal())}>
-        .
-      </button>
     </div>
   );
 };
