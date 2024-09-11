@@ -1,10 +1,11 @@
-body{
+body {
   background-image: url(oo.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
+
 .calculator {
-  background-color: #222; /* Dark background */
+  background-color: #222;
   width: 300px;
   padding: 40px;
   border-radius: 15px;
@@ -48,7 +49,6 @@ button:active {
   box-shadow: 0 3px rgba(0, 0, 0, 0.5);
 }
 
-
 button:hover {
   background-color: #555;
 }
@@ -57,7 +57,6 @@ button:hover {
   background-color: hsl(0, 2%, 79%);
   color: #000;
 }
-
 
 #decimal {
   width: 100%;
@@ -71,7 +70,6 @@ button:focus {
 
 #equals {
   width: 100%;
-  color: #fff;
   background-color: hsl(0, 2%, 79%);
   color: #000;
 }
@@ -90,11 +88,17 @@ button:focus {
 
 .App-header {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
+  flex-direction: column;
+  align-items: center;
 }
 
 .name {
-  margin-top: 20px; /* Space between Calculator and h1 */
-  font-size: 24px; /* Adjust font size as needed */
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+@media (max-width: 600px) {
+  .calculator {
+    margin-top: 30%;
+  }
 }
