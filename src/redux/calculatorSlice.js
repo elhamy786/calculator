@@ -36,7 +36,6 @@ const calculatorSlice = createSlice({
     },
     inputOperator: (state, action) => {
       const nextOperator = action.payload;
-    
       if (state.lastWasEquals) {
         state.expression = `${state.lastResult} ${nextOperator} `;
         state.displayValue = `${state.lastResult} ${nextOperator} `;
@@ -57,11 +56,11 @@ const calculatorSlice = createSlice({
           state.expression += ` ${nextOperator} `;
           state.displayValue += ` ${nextOperator} `;
         }
-    
+
         state.operator = nextOperator;
         state.waitingForOperand = true;
       }
-    
+
       state.lastWasEquals = false;
     },
 
