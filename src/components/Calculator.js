@@ -25,7 +25,6 @@ const buttons = [
   { id: 'three', label: '3', type: 'digit' },
   { id: 'decimal', label: '.', type: 'digit' },
   { id: 'zero', label: '0', type: 'digit' },
-
 ];
 
 const Calculator = () => {
@@ -57,7 +56,12 @@ const Calculator = () => {
       <div id="display">{displayValue}</div>
       <div className="buttons">
         {buttons.map(({ id, label, type }) => (
-          <button key={id} id={id} type="button" onClick={() => handleButtonClick(type, label)}>
+          <button
+            key={id}
+            id={id}
+            type="button"
+            onClick={() => handleButtonClick(type, label)}
+          >
             {label}
           </button>
         ))}
